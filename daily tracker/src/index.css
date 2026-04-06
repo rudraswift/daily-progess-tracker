@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root, :root.light {
+  --color-surface: #f8fafc;
+  --color-surface-container-low: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #f1f5f9;
+  --color-surface-container-highest: #e2e8f0;
+  --color-surface-variant: #e2e8f0;
+
+  --color-on-surface: #0f172a;
+  --color-on-surface-variant: #475569;
+  --color-background-grad-1: #f8fafc; /* Soft gray */
+  --color-background-grad-2: #f1f5f9; /* Slightly darker gray */
+  --color-background-grad-3: #f8fafc; 
+
+
+  /* Accents */
+  --color-primary: #4a4bd7;
+  --color-primary-container: #7073ff;
+  --color-on-primary-container: #fbf7ff;
+  --color-tertiary: #006d4a; /* Vibrant Success Green */
+  
+  --color-secondary-container: #d4e4fa;
+  --color-on-secondary-container: #445365;
+
+  /* Typography */
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+:root.dark {
+  --color-surface: #0f172a;
+  --color-surface-container-low: #1e293b;
+  --color-surface-container-lowest: #1e293b;
+  --color-surface-container-high: #334155;
+  --color-surface-container-highest: #475569;
+  --color-surface-variant: #334155;
+
+  --color-on-surface: #e2e8f0;
+  --color-on-surface-variant: #94a3b8;
+  --color-background-grad-1: #0f172a; /* Deep blue */
+  --color-background-grad-2: #020617; /* Blackish blue */
+  --color-background-grad-3: #0f172a; /* Deep blue */
+}
+
+* { box-sizing: border-box; }
+
+@keyframes gradientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, var(--color-background-grad-1), var(--color-background-grad-2), var(--color-background-grad-3));
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  /* The Zen Workspace forbids sharp corners, soft transitions overall */
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .display-num {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+/* Base Utility Classes */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+
+/* Ambient shadow for interactive items */
+.shadow-ambient {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+}
+.shadow-ambient:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08); /* hover state elevation */
+}
+:root.dark .shadow-ambient { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); }
+:root.dark .shadow-ambient:hover { box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5); }
+
+/* Glassmorphism Structural Classes */
+.section-bucket, .task-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  border-radius: 1.5rem;
+}
+:root.dark .section-bucket, :root.dark .task-card { border: 1px solid rgba(255, 255, 255, 0.05); }
+
+.section-bucket {
+  background-color: var(--color-surface-container-low);
+  border-radius: 2rem; 
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.task-card {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: 1.5rem; 
+  padding: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  background-size: 200% 200%;
+  border-radius: 9999px; /* roundedness-full */
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
+}
+.btn-primary:active {
+  transform: scale(0.96);
+}
+.btn-primary:hover {
+  background-position: 100% 50%;
+  box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3); 
+}
+
+/* Inputs */
+.ghost-input {
+  background-color: var(--color-surface-container-high);
+  border: 1.5px solid transparent;
+  border-radius: 1rem;
+  padding: 0.875rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-on-surface);
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+}
+.ghost-input:focus {
+  border-color: rgba(99, 102, 241, 0.6);
+  background-color: var(--color-surface-container-lowest);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-container-highest);
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-surface-variant);
+}
+
+/* Animation Utilities */
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
