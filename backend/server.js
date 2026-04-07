@@ -8,7 +8,13 @@ const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/daily_tracker';
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // local dev
+    'https://your-app.vercel.app', // your Vercel URL
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
