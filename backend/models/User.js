@@ -15,7 +15,22 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    // Not required because Google OAuth users do not have a standard password
+    required: false,
+  },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true, // sparse allows multiple nulls
+  },
+  profilePicture: {
+    type: String,
+    default: '',
+  },
+  authProvider: {
+    type: String,
+    enum: ['local', 'google'],
+    default: 'local'
   }
 }, { timestamps: true });
 

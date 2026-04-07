@@ -5,6 +5,7 @@ import { LogOut } from 'lucide-react';
 import TaskCard from '../components/TaskCard';
 import useGreeting from '../hooks/useGreeting';
 import { APP_CONFIG } from '../config/constants';
+import anime from 'animejs';
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -27,6 +28,20 @@ const Dashboard = () => {
         setLoading(false);
       });
   }, []);
+
+  // Stagger animation when tasks load
+  useEffect(() => {
+    if (!loading) {
+      anime({
+        targets: '.dashboard-stagger',
+        translateY: [20, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(100),
+        easing: 'easeOutExpo',
+        duration: 800
+      });
+    }
+  }, [loading, tasks]);
 
   const toggleTaskStatus = async (id) => {
     const task = tasks.find(t => t._id === id);
@@ -155,7 +170,9 @@ const Dashboard = () => {
         ) : todaysTasks.length > 0 ? (
           <div className="flex flex-col gap-4">
             {todaysTasks.map(task => (
-              <TaskCard key={task._id} task={task} onToggleStatus={toggleTaskStatus} onDelete={deleteTask} />
+              <div key={task._id} className="dashboard-stagger opacity-0">
+                <TaskCard task={task} onToggleStatus={toggleTaskStatus} onDelete={deleteTask} />
+              </div>
             ))}
           </div>
         ) : (
@@ -173,7 +190,9 @@ const Dashboard = () => {
           </div>
           <div className="flex flex-col gap-4 opacity-80 hover:opacity-100 transition-opacity">
             {upcomingTasks.map(task => (
-              <TaskCard key={task._id} task={task} onToggleStatus={toggleTaskStatus} onDelete={deleteTask} />
+              <div key={task._id} className="dashboard-stagger opacity-0">
+                 <TaskCard task={task} onToggleStatus={toggleTaskStatus} onDelete={deleteTask} />
+              </div>
             ))}
           </div>
         </section>

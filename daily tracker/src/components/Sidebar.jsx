@@ -81,22 +81,28 @@ const Sidebar = () => {
         </nav>
         
         {/* User Profile & Logout Bottom Anchor */}
-        <div className="mt-8 border-t border-outline-variant/30 pt-4 pb-2">
-          <div className="flex items-center gap-3 px-4 py-2 text-on-surface-variant bg-surface-container-low rounded-xl mb-3 glass-panel">
-            <div className="bg-primary/20 p-2 rounded-lg text-primary">
+        <div className="mt-auto border-t border-slate-200/20 pt-6 pb-2 w-full flex flex-col gap-3">
+          
+          <div className="flex items-center gap-3 px-4 py-3 bg-slate-800/40 border border-slate-700/50 rounded-xl transition-all hover:bg-slate-800/60 shadow-ambient w-full overflow-hidden">
+            <div className="bg-primary/20 p-2.5 rounded-lg text-primary shrink-0">
                <UserIcon size={18} />
             </div>
-            <div className="flex flex-col text-sm truncate">
-               <span className="font-bold text-on-surface truncate">{user.name}</span>
-               <span className="text-xs truncate">{user.email}</span>
+            
+            <div className="flex flex-col min-w-0 flex-1 gap-0.5">
+               <span className="font-bold text-slate-100 text-[0.95rem] tracking-tight truncate w-full">
+                 {user.name}
+               </span>
+               <span className="text-xs text-slate-400 font-medium truncate w-full">
+                 {user.email}
+               </span>
             </div>
           </div>
           
           <button 
              onClick={handleLogout}
-             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all text-error hover:bg-error/10 hover:text-error"
+             className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold transition-all text-red-400 hover:bg-red-500/10 hover:text-red-300"
           >
-             <LogOut size={20} />
+             <LogOut size={18} />
              Logout
           </button>
         </div>

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Eye, EyeOff, AlertCircle, Lock, Shield, Loader2 } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
 import logo from '../assets/mindful.png';
 
 const Login = () => {
@@ -11,7 +12,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { login } = useContext(AuthContext);
+  const { login, loginWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -41,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 md:p-10 flex flex-col justify-between bg-gradient-to-br from-indigo-50 via-white to-purple-50 text-slate-800">
+    <div className="min-h-screen p-6 md:p-10 flex flex-col justify-between bg-transparent text-slate-200">
       
       {/* Top Main Content Section Container */}
       <div className="flex-1 flex flex-col items-center justify-center relative z-10 w-full py-10">
@@ -56,11 +57,11 @@ const Login = () => {
         </div>
         
         {/* Central Card */}
-        <div className="bg-white/70 backdrop-blur-2xl p-8 sm:p-10 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.06)] border border-white/50 max-w-[420px] w-full mx-auto relative overflow-hidden">
+        <div className="bg-surface-container-low/70 backdrop-blur-2xl p-8 sm:p-10 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.4)] border border-surface-variant/50 max-w-[420px] w-full mx-auto relative overflow-hidden">
           
           <div className="text-center mb-8">
-            <h2 className="text-[28px] font-bold text-slate-900 tracking-tight leading-tight">Welcome back</h2>
-            <p className="text-slate-500 mt-2 text-sm font-medium">Continue your journey to productivity.</p>
+            <h2 className="text-[28px] font-bold text-on-surface tracking-tight leading-tight">Welcome back</h2>
+            <p className="text-on-surface-variant mt-2 text-sm font-medium">Continue your journey to productivity.</p>
           </div>
 
           {error && (
@@ -119,6 +120,40 @@ const Login = () => {
               </div>
             </button>
           </form>
+
+          <div className="relative mt-8 mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-700/50"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-3 bg-surface-container-low text-slate-400 font-medium tracking-wide">OR CONTINUE WITH</span>
+            </div>
+          </div>
+
+          <div className="flex justify-center w-full [&>div]:w-full opacity-90 hover:opacity-100 transition-opacity">
+            <GoogleLogin
+              onSuccess={async (credentialResponse) => {
+                setLoading(true);
+                setError('');
+                try {
+                  await loginWithGoogle(credentialResponse.credential);
+                  navigate('/');
+                } catch (err) {
+                  setError(err.message || 'Google Auth Failed');
+                } finally {
+                  setLoading(false);
+                }
+              }}
+              onError={() => {
+                setError('Google Authentication was cancelled or failed.');
+              }}
+              theme="filled_black"
+              size="large"
+              width="100%"
+              shape="pill"
+              text="continue_with"
+            />
+          </div>
 
           <p className="text-center mt-8 text-slate-500 text-sm font-medium">
             New here? <Link to="/signup" className="text-purple-600 font-bold hover:text-purple-700 transition-colors">Create an account</Link>

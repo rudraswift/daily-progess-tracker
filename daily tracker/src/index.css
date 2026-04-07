@@ -3,28 +3,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 :root, :root.light {
-  --color-surface: #f8fafc;
-  --color-surface-container-low: #ffffff;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-high: #f1f5f9;
-  --color-surface-container-highest: #e2e8f0;
-  --color-surface-variant: #e2e8f0;
+  --color-surface: #0b0f19;
+  --color-surface-container-low: #121826;
+  --color-surface-container-lowest: #0e121d;
+  --color-surface-container-high: #1f2937;
+  --color-surface-container-highest: #374151;
+  --color-surface-variant: #1f2937;
 
-  --color-on-surface: #0f172a;
-  --color-on-surface-variant: #475569;
-  --color-background-grad-1: #f8fafc; /* Soft gray */
-  --color-background-grad-2: #f1f5f9; /* Slightly darker gray */
-  --color-background-grad-3: #f8fafc; 
+  --color-on-surface: #f3f4f6;
+  --color-on-surface-variant: #9ca3af;
+  --color-background-grad-1: #0b0f19;
+  --color-background-grad-2: #020306;
+  --color-background-grad-3: #111827;
 
-
-  /* Accents */
-  --color-primary: #4a4bd7;
-  --color-primary-container: #7073ff;
-  --color-on-primary-container: #fbf7ff;
-  --color-tertiary: #006d4a; /* Vibrant Success Green */
-  
-  --color-secondary-container: #d4e4fa;
-  --color-on-secondary-container: #445365;
+  /* Anime.js inspired accents */
+  --color-primary: #FF4B4B;
+  --color-primary-container: #ff7676;
+  --color-on-primary-container: #1a0000;
+  --color-tertiary: #18FF9F;
+  --color-secondary-container: #1e1e2d;
+  --color-on-secondary-container: #a3a3c2;
 
   /* Typography */
   --font-display: 'Manrope', sans-serif;
@@ -32,18 +30,26 @@
 }
 
 :root.dark {
-  --color-surface: #0f172a;
-  --color-surface-container-low: #1e293b;
-  --color-surface-container-lowest: #1e293b;
-  --color-surface-container-high: #334155;
-  --color-surface-container-highest: #475569;
-  --color-surface-variant: #334155;
+  --color-surface: #0b0f19;
+  --color-surface-container-low: #121826;
+  --color-surface-container-lowest: #0e121d;
+  --color-surface-container-high: #1f2937;
+  --color-surface-container-highest: #374151;
+  --color-surface-variant: #1f2937;
 
-  --color-on-surface: #e2e8f0;
-  --color-on-surface-variant: #94a3b8;
-  --color-background-grad-1: #0f172a; /* Deep blue */
-  --color-background-grad-2: #020617; /* Blackish blue */
-  --color-background-grad-3: #0f172a; /* Deep blue */
+  --color-on-surface: #f3f4f6;
+  --color-on-surface-variant: #9ca3af;
+  --color-background-grad-1: #0b0f19;
+  --color-background-grad-2: #020306;
+  --color-background-grad-3: #111827;
+
+  /* Anime.js inspired accents */
+  --color-primary: #FF4B4B;
+  --color-primary-container: #ff7676;
+  --color-on-primary-container: #1a0000;
+  --color-tertiary: #18FF9F;
+  --color-secondary-container: #1e1e2d;
+  --color-on-secondary-container: #a3a3c2;
 }
 
 * { box-sizing: border-box; }
@@ -111,7 +117,7 @@ h1, h2, h3, h4, h5, h6, .display-num {
 
 /* Buttons */
 .btn-primary {
-  background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  background: linear-gradient(135deg, #FF4B4B, #ff7676);
   background-size: 200% 200%;
   border-radius: 9999px; /* roundedness-full */
   color: #ffffff;
@@ -121,13 +127,15 @@ h1, h2, h3, h4, h5, h6, .display-num {
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
+  box-shadow: 0 4px 14px 0 rgba(255, 75, 75, 0.39);
 }
 .btn-primary:active {
-  transform: scale(0.96);
+  transform: scale(0.92);
 }
 .btn-primary:hover {
   background-position: 100% 50%;
-  box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3); 
+  box-shadow: 0 6px 20px rgba(255, 75, 75, 0.5); 
+  transform: translateY(-1px);
 }
 
 /* Inputs */
