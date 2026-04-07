@@ -1,0 +1,6 @@
+node_modules/
+backend/.env
+backend/node_modules/
+daily tracker/node_modules/
+daily tracker/.env
+.DS_Store
