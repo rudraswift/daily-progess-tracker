@@ -3,26 +3,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 :root, :root.light {
-  --color-surface: #0b0f19;
-  --color-surface-container-low: #121826;
-  --color-surface-container-lowest: #0e121d;
-  --color-surface-container-high: #1f2937;
-  --color-surface-container-highest: #374151;
-  --color-surface-variant: #1f2937;
+  /* Light theme */
+  --color-surface: #f8fafc; /* slate-50 */
+  --color-surface-container-low: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #f1f5f9; /* slate-100 */
+  --color-surface-container-highest: #e2e8f0; /* slate-200 */
+  --color-surface-variant: #e2e8f0;
 
-  --color-on-surface: #f3f4f6;
-  --color-on-surface-variant: #9ca3af;
-  --color-background-grad-1: #0b0f19;
-  --color-background-grad-2: #020306;
-  --color-background-grad-3: #111827;
+  --color-on-surface: #0f172a; /* slate-900 */
+  --color-on-surface-variant: #475569; /* slate-600 */
+  --color-background-grad-1: #f8fafc;
+  --color-background-grad-2: #eef2ff; /* indigo-50 */
+  --color-background-grad-3: #ecfeff; /* cyan-50 */
 
-  /* Anime.js inspired accents */
+  /* Accents (kept consistent across themes) */
   --color-primary: #FF4B4B;
   --color-primary-container: #ff7676;
   --color-on-primary-container: #1a0000;
   --color-tertiary: #18FF9F;
-  --color-secondary-container: #1e1e2d;
-  --color-on-secondary-container: #a3a3c2;
+  --color-secondary-container: #eaeaf2;
+  --color-on-secondary-container: #1f2937;
 
   /* Typography */
   --font-display: 'Manrope', sans-serif;
@@ -30,6 +31,7 @@
 }
 
 :root.dark {
+  /* Dark theme */
   --color-surface: #0b0f19;
   --color-surface-container-low: #121826;
   --color-surface-container-lowest: #0e121d;

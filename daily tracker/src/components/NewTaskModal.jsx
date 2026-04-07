@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, X, Clock, Tag } from 'lucide-react';
+import { API_BASE_URL } from '../config/constants';
 
 const NewTaskModal = ({ isOpen, onClose }) => {
   const getFormattedDate = (daysToAdd = 0) => {
@@ -27,7 +28,7 @@ const NewTaskModal = ({ isOpen, onClose }) => {
     
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/tasks', {
+      const response = await fetch(`${API_BASE_URL}/api/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

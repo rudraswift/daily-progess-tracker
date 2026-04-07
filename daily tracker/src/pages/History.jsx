@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TaskCard from '../components/TaskCard';
 import { Calendar as CalendarIcon, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { API_BASE_URL } from '../config/constants';
 
 const History = () => {
   // Initialize to yesterday since Dashboard already handles Today
@@ -19,11 +20,11 @@ const History = () => {
       try {
         const [histRes, todayRes] = await Promise.all([
           // The selected date triggers the exact start/end bounds on the backend
-          fetch(`http://localhost:5000/api/tasks?date=${selectedDate}`, {
+          fetch(`${API_BASE_URL}/api/tasks?date=${selectedDate}`, {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
           }),
           // Defaults to Today
-          fetch(`http://localhost:5000/api/tasks`, {
+          fetch(`${API_BASE_URL}/api/tasks`, {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
           }) 
         ]);
@@ -50,7 +51,7 @@ const History = () => {
     
     const newStatus = task.status === 'completed' ? 'pending' : 'completed';
     try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

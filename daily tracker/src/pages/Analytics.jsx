@@ -3,6 +3,7 @@ import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell
 } from 'recharts';
 import { Flame, Trophy } from 'lucide-react';
+import { API_BASE_URL } from '../config/constants';
 
 const Analytics = () => {
   const [data, setData] = useState(null);
@@ -11,7 +12,7 @@ const Analytics = () => {
 
   useEffect(() => {
     // 1. Fetching the aggregated data from our updated Express backend
-    fetch('http://localhost:5000/api/analytics', {
+    fetch(`${API_BASE_URL}/api/analytics`, {
        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
       .then(res => res.json())

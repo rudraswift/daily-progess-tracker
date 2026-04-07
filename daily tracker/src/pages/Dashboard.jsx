@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { LogOut } from 'lucide-react';
 import TaskCard from '../components/TaskCard';
 import useGreeting from '../hooks/useGreeting';
-import { APP_CONFIG } from '../config/constants';
+import { APP_CONFIG, API_BASE_URL } from '../config/constants';
 import anime from 'animejs';
 
 const Dashboard = () => {
@@ -15,7 +15,7 @@ const Dashboard = () => {
   const { greeting, motivation } = useGreeting();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/tasks?all=true', {
+    fetch(`${API_BASE_URL}/api/tasks?all=true`, {
        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
       .then(res => res.json())
@@ -50,7 +50,7 @@ const Dashboard = () => {
     const newStatus = task.status === 'completed' ? 'pending' : 'completed';
     
     try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   const deleteTask = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });

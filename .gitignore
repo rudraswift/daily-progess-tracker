@@ -1,3 +1,4 @@
+# Never upload secrets or dependencies
 node_modules/
 backend/.env
 backend/node_modules/

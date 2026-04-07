@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { TrendingUp, TrendingDown, Clock, Activity, Calendar, Search, Zap } from 'lucide-react';
+import { API_BASE_URL } from '../config/constants';
 
 const DailyReport = () => {
   const [data, setData] = useState(null);
@@ -13,7 +14,7 @@ const DailyReport = () => {
 
   useEffect(() => {
     // 1. Optimized Fetch: Single request pulls entirely mapped history + insights
-    fetch('http://localhost:5000/api/reports', {
+    fetch(`${API_BASE_URL}/api/reports`, {
        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
       .then(res => res.json())

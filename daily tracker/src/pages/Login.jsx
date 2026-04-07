@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/constants';
 import { Eye, EyeOff, AlertCircle, Lock, Shield, Loader2 } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
 import logo from '../assets/mindful.png';
@@ -21,7 +22,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
