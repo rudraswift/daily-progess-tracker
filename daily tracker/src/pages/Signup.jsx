@@ -37,7 +37,10 @@ const Signup = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: formData.name, email: formData.email, password: formData.password })
       });
-      const data = await res.json();
+      const contentType = res.headers.get('content-type') || '';
+      const data = contentType.includes('application/json')
+        ? await res.json()
+        : { msg: await res.text() };
       
       if (!res.ok) {
         throw new Error(data.msg || 'Signup failed. Please try again.');

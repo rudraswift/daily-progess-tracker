@@ -27,7 +27,10 @@ const Login = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      const data = await res.json();
+      const contentType = res.headers.get('content-type') || '';
+      const data = contentType.includes('application/json')
+        ? await res.json()
+        : { msg: await res.text() };
       
       if (!res.ok) {
         throw new Error(data.msg || 'Invalid credentials. Please try again.');

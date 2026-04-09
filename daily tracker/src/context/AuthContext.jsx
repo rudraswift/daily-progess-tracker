@@ -49,7 +49,10 @@ export const AuthProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: googleToken })
     });
-    const data = await res.json();
+    const contentType = res.headers.get('content-type') || '';
+    const data = contentType.includes('application/json')
+      ? await res.json()
+      : { msg: await res.text() };
     if (!res.ok) throw new Error(data.msg || 'Google Authentication Failed');
     
     login(data.user, data.token);
