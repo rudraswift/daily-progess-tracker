@@ -6,7 +6,7 @@ import App from './App.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'fallback_client_id_needs_config';
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 import { ThemeProvider } from './context/ThemeContext.jsx'
 
@@ -15,9 +15,15 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ThemeProvider>
         <AuthProvider>
-          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            <App />
-          </GoogleOAuthProvider>
+          {GOOGLE_CLIENT_ID ? (
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+              <App />
+            </GoogleOAuthProvider>
+          ) : (
+            <div style={{ padding: '1rem', fontFamily: 'system-ui, sans-serif' }}>
+              Missing `VITE_GOOGLE_CLIENT_ID`. Add it in Vercel environment variables and redeploy.
+            </div>
+          )}
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
